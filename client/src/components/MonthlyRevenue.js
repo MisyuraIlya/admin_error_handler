@@ -9,7 +9,7 @@ const MonthlyRevenue = () => {
                 to="/clients"
                 icon={icon}
                 title={'All Clients'}
-                subtitle={'Critical Errors'}
+                subtitle={'Digitrade Clients'}
                 cartouche={cartouche}
             />
         </div>

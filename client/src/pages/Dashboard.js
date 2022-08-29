@@ -4,7 +4,7 @@ import MonthlyRevenue from '../components/MonthlyRevenue';
 import NbNewOrders from '../components/NbNewOrders';
 import ErrorReviews from '../components/ErrorReviews';
 import ServicesError from '../components/ServicesError';
-
+import DashboardChar from '../charts/DashboardChar';
 const Spacer = () => <span style={{ width: '1em' }} />;
 
 const Dashboard = () => {
@@ -40,6 +40,7 @@ const Dashboard = () => {
                         <ServicesError />
                     </div>
                 </div>
+                <DashboardChar/>
             </div>
         </>
     );

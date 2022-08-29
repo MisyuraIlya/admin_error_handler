@@ -50,48 +50,228 @@
       "name":"Shanib2b"
     }
   ],
+  "clients": [
+    {
+      "id": "1",
+      "name": "churi"
+    },
+    {
+      "id": "2",
+      "name": "berman"
+    },
+    {
+      "id": "3",
+      "name": "shanib2b"
+    }
+  ],
   "errors":[
     {
       "id":"1",
-      "project":"berman",
-      "statusCode":"400",
+      "date":"27/01/2023",
+      "time":"08:00:00",
+      "name":"berman",
+      "code":"400",
       "status":"critical",
-      "title":"form error",
+      "error":"form error",
       "description":"input error"
     },
     {
       "id":"2",
-      "project":"berman",
-      "statusCode":"400",
+      "date":"27/01/2023",
+      "time":"08:00:00",
+      "name":"berman",
+      "code":"400",
       "status":"critical",
-      "title":"form error",
+      "error":"form error",
       "description":"input error"
     },
     {
       "id":"3",
-      "project":"Churi",
-      "statusCode":"400",
+      "date":"27/01/2023",
+      "time":"08:00:00",
+      "name":"berman",
+      "code":"400",
       "status":"critical",
-      "title":"form error",
+      "error":"form error",
       "description":"input error"
     },
     {
       "id":"4",
-      "project":"hashmal",
-      "statusCode":"400",
+      "date":"27/01/2023",
+      "time":"08:00:00",
+      "name":"berman",
+      "code":"400",
       "status":"critical",
-      "title":"form error",
+      "error":"form error",
       "description":"input error"
     },
     {
       "id":"5",
-      "project":"shanib2b",
-      "statusCode":"400",
+      "date":"27/01/2023",
+      "time":"08:00:00",
+      "name":"berman",
+      "code":"400",
       "status":"critical",
-      "title":"form error",
+      "error":"form error",
+      "description":"input error"
+    }
+  ],
+  "last24":[
+    {
+      "id":"1",
+      "date":"27/01/2023",
+      "time":"08:00:00",
+      "name":"berman",
+      "code":"400",
+      "status":"critical",
+      "error":"form error",
+      "description":"input error"
+    },
+    {
+      "id":"2",
+      "date":"27/01/2023",
+      "time":"08:00:00",
+      "name":"berman",
+      "code":"400",
+      "status":"pending",
+      "error":"form error",
+      "description":"input error"
+    },
+    {
+      "id":"3",
+      "date":"27/01/2023",
+      "time":"08:00:00",
+      "name":"berman",
+      "code":"400",
+      "status":"critical",
+      "error":"form error",
+      "description":"input error"
+    },
+    {
+      "id":"4",
+      "date":"27/01/2023",
+      "time":"08:00:00",
+      "name":"berman",
+      "code":"400",
+      "status":"critical",
+      "error":"form error",
+      "description":"input error"
+    },
+    {
+      "id":"5",
+      "date":"27/01/2023",
+      "time":"08:00:00",
+      "name":"berman",
+      "code":"400",
+      "status":"critical",
+      "error":"form error",
       "description":"input error"
     }
     
+  ],
+  "critical":[
+    {
+      "id":"1",
+      "date":"27/01/2023",
+      "time":"08:00:00",
+      "name":"berman",
+      "code":"400",
+      "status":"critical",
+      "error":"form error",
+      "description":"input error"
+    },
+    {
+      "id":"2",
+      "date":"27/01/2023",
+      "time":"08:00:00",
+      "name":"berman",
+      "code":"400",
+      "status":"critical",
+      "error":"form error",
+      "description":"input error"
+    },
+    {
+      "id":"3",
+      "date":"27/01/2023",
+      "time":"08:00:00",
+      "name":"berman",
+      "code":"400",
+      "status":"critical",
+      "error":"form error",
+      "description":"input error"
+    },
+    {
+      "id":"4",
+      "date":"27/01/2023",
+      "time":"08:00:00",
+      "name":"berman",
+      "code":"400",
+      "status":"critical",
+      "error":"form error",
+      "description":"input error"
+    },
+    {
+      "id":"5",
+      "date":"27/01/2023",
+      "time":"08:00:00",
+      "name":"berman",
+      "code":"400",
+      "status":"critical",
+      "error":"form error",
+      "description":"input error"
+    }
+  ],
+  "services":[
+    {
+      "id":"1",
+      "date":"27/01/2023",
+      "time":"08:00:00",
+      "name":"slika1",
+      "code":"400",
+      "status":"critical",
+      "error":"form error",
+      "description":"input error"
+    },
+    {
+      "id":"2",
+      "date":"27/01/2023",
+      "time":"08:00:00",
+      "name":"server1",
+      "code":"400",
+      "status":"critical",
+      "error":"form error",
+      "description":"input error"
+    },
+    {
+      "id":"3",
+      "date":"27/01/2023",
+      "time":"08:00:00",
+      "name":"Docker 1 ",
+      "code":"400",
+      "status":"critical",
+      "error":"form error",
+      "description":"input error"
+    },
+    {
+      "id":"4",
+      "date":"27/01/2023",
+      "time":"08:00:00",
+      "name":"Docker 2",
+      "code":"400",
+      "status":"critical",
+      "error":"form error",
+      "description":"input error"
+    },
+    {
+      "id":"5",
+      "date":"27/01/2023",
+      "time":"08:00:00",
+      "name":"Docker 3",
+      "code":"400",
+      "status":"critical",
+      "error":"form error",
+      "description":"input error"
+    }
   ]
   
 

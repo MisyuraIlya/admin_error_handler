@@ -9,7 +9,7 @@ const NbNewOrders = () => {
                 to="/last24"
                 icon={icon}
                 title={'Last 24 hour Errors'}
-                subtitle={'Critical Errors'}
+                subtitle={'Fetched last 24 hour errors'}
                 cartouche={cartouche}
             />
         </div>

@@ -1,15 +1,13 @@
 import React from 'react';
 import { Box, Card, CardActions, Button, Typography } from '@mui/material';
-import HomeIcon from '@mui/icons-material/Home';
-import CodeIcon from '@mui/icons-material/Code';
 import { matchPath, useLocation, useNavigate } from 'react-router-dom';
-const Welcome = () => {
+import PhpCode from './PhpCode';
 
+const PhpCard = () => {
     const navigate = useNavigate();
-
     return (
         <div>
-            <Card
+        <Card
             sx={{
                 background: theme =>
                     theme.palette.mode === 'dark'
@@ -25,11 +23,11 @@ const Welcome = () => {
             <Box display="flex">
                 <Box flex="1">
                     <Typography variant="h5" component="h2" gutterBottom>
-                       Welcome to Digitrade Developer Tool 
+                       PHP API CODE 
                     </Typography>
                     <Box maxWidth="40em">
                         <Typography variant="body1" component="p" gutterBottom>
-                            This is a admin panel for handling errors from our clients
+                            add this segment of code to your project
                         </Typography>
                     </Box>
                     <CardActions
@@ -43,20 +41,6 @@ const Welcome = () => {
                             },
                         }}
                     >
-                        <Button
-                            variant="contained"
-                            onClick={()=>navigate("/clients")}
-                            startIcon={<HomeIcon />}
-                        >
-                            Clients
-                        </Button>
-                        <Button
-                            onClick={()=>navigate("/api")}
-                            variant="contained"
-                            startIcon={<CodeIcon />}
-                        >
-                            API
-                        </Button>
                     </CardActions>
                 </Box>
                 <Box
@@ -70,9 +54,10 @@ const Welcome = () => {
                     overflow="hidden"
                 />
             </Box>
+            <PhpCode/>
         </Card>
         </div>
     );
 };
 
-export default Welcome;
+export default PhpCard;
