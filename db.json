@@ -1,0 +1,98 @@
+{
+  "posts": [
+    {
+      "id": "1",
+      "title": "Post ine",
+      "body": "this is the post body",
+      "publishedAr": "24.8.2022"
+    },
+    {
+      "id": "2",
+      "title": "Post ine",
+      "body": "this is the post body",
+      "publishedAr": "24.8.2022"
+    },
+    {
+      "id": "3",
+      "title": "Post ine",
+      "body": "this is the post body",
+      "publishedAr": "24.8.2022"
+    },
+    {
+      "title": "for",
+      "body": "four",
+      "publishedAt": "2022-08-24",
+      "id": "UqISmWt"
+    }
+  ],
+  "users": [
+    {
+      "id": "1",
+      "name": "Ilya",
+      "email": "ilya@gmail.com"
+    }
+  ],
+  "projects": [
+    {
+      "id":"1",
+      "name":"Churi"
+    },
+    {
+      "id":"2",
+      "name":"hashmal"
+    },
+    {
+      "id":"3",
+      "name":"Berman"
+    },
+    {
+      "id":"4",
+      "name":"Shanib2b"
+    }
+  ],
+  "errors":[
+    {
+      "id":"1",
+      "project":"berman",
+      "statusCode":"400",
+      "status":"critical",
+      "title":"form error",
+      "description":"input error"
+    },
+    {
+      "id":"2",
+      "project":"berman",
+      "statusCode":"400",
+      "status":"critical",
+      "title":"form error",
+      "description":"input error"
+    },
+    {
+      "id":"3",
+      "project":"Churi",
+      "statusCode":"400",
+      "status":"critical",
+      "title":"form error",
+      "description":"input error"
+    },
+    {
+      "id":"4",
+      "project":"hashmal",
+      "statusCode":"400",
+      "status":"critical",
+      "title":"form error",
+      "description":"input error"
+    },
+    {
+      "id":"5",
+      "project":"shanib2b",
+      "statusCode":"400",
+      "status":"critical",
+      "title":"form error",
+      "description":"input error"
+    }
+    
+  ]
+  
+
+}
