@@ -30,7 +30,11 @@ const Dashboard = () => {
                         <div style={{width:'50%'}}>
                             <NbNewOrders/>
                         </div>
+
                     </div>
+                    <div style={styles.singleCol}>
+                            <DashboardChar/>
+                         </div>
                 </div>
                 
                 <div style={styles.rightCol}>
@@ -40,7 +44,6 @@ const Dashboard = () => {
                         <ServicesError />
                     </div>
                 </div>
-                <DashboardChar/>
             </div>
         </>
     );
