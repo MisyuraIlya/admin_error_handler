@@ -1,16 +1,8 @@
-const express = require('express');
-const db = require('../db');
+import Router from 'express';
+import ErrorController from '../controllers/error-controller.js';
+const routerError = new Router();
 
-const router = express.Router();
+routerError.get('/errors', ErrorController.ReadErrors);
 
-router.get('/', async (req, res, next) => {
-    try {
-        let results = await db.all();
-        req.json(results)
-    } catch(e) {
-        console.log(e)
-        res.sendStatus(500);
-    }
-})
 
-module.exports = router;
+export default routerError
