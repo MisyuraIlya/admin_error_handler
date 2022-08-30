@@ -38,7 +38,7 @@ const ErrorReviews = () => {
                     key={item.id}
                     button
                     component={Link}
-                    to={`/reviews/${item.id}`}
+                    to={`/critical/${item.id}`}
                     alignItems="flex-start"
                 >
                     <ListItemAvatar>

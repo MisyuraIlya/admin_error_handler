@@ -20,6 +20,16 @@ import {
 } from 'react-admin';
 import cartouche from '../images/red-cartouche.png'
 import icon from '../images/warning.svg'
+
+const data = [
+    {id:'1', title:'Churi', error:'cannot fetch data'},
+    {id:'2', title:'Churi', error:'cannot fetch data'},
+    {id:'3', title:'Churi', error:'cannot fetch data'},
+    {id:'4', title:'Churi', error:'cannot fetch data'},
+    {id:'5', title:'Churi', error:'cannot fetch data'},
+    
+]
+
 const ServicesError = () => {
     return (
 <CardWithIcon
@@ -37,23 +47,23 @@ const ServicesError = () => {
         <List
         //  sx={{ display }}
          >
-            {/* {reviews?.map((record: Review) => (
+            {data?.map((item) => (
                 <ListItem
-                    key={record.id}
+                    key={item.id}
                     button
                     component={Link}
-                    to={`/reviews/${record.id}`}
+                    to={`/services/${item.id}`}
                     alignItems="flex-start"
                 >
                     <ListItemAvatar>
                         <ReferenceField
-                            record={record}
+                            record={item}
                             source="customer_id"
                             reference="customers"
                             link={false}
                         >
-                            <FunctionField
-                                render={(customer: Customer) => (
+                            {/* <FunctionField
+                                render={() => (
                                     <Avatar
                                         src={`${customer.avatar}?size=32x32`}
                                         sx={{
@@ -61,13 +71,13 @@ const ServicesError = () => {
                                         }}
                                     />
                                 )}
-                            />
+                            /> */}
                         </ReferenceField>
                     </ListItemAvatar>
 
                     <ListItemText
-                        // primary={<StarRatingField record={record} />}
-                        secondary={record.comment}
+                        primary={item.title}
+                        secondary={item.error}
                         sx={{
                             overflowY: 'hidden',
                             height: '4em',
@@ -78,7 +88,7 @@ const ServicesError = () => {
                         }}
                     />
                 </ListItem>
-            ))} */}
+            ))}
         </List>
         <Box flexGrow={1}>&nbsp;</Box>
         <Button
