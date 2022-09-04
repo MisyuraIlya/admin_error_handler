@@ -1,3 +1,4 @@
+import { json } from 'express';
 import ErrorMysqlFactory from '../classes/factory.js'
 
 class ErrorService {
@@ -9,9 +10,9 @@ class ErrorService {
         return { response:result };
     }
 
-    async CreateError(project,title,code,status,description){
+    async CreateError(project,title,code,status,description,response, body, language){
 
-        const result = await ErrorMysqlFactory.CreateError(project,title,code,status,description);
+        const result = await ErrorMysqlFactory.CreateError(project,title,code,status,description, response, body, language);
         
         return { response:result };
     }
@@ -20,9 +21,10 @@ class ErrorService {
         const result = await ErrorMysqlFactory.ReadAllProjects();
         return { response: result }
     }
-
+    
     async ReadOneProject(id){
-        const result = await ErrorMysqlFactory.ReadOneProject(id);
+        const getId = await ErrorMysqlFactory.ReadOneProject(id);
+        const result = await ErrorMysqlFactory.GetErrorsPerProject(getId[0].title)
         return { response: result }
     }
 
@@ -30,6 +32,16 @@ class ErrorService {
 
         const result = await ErrorMysqlFactory.CreateProject(title);
         
+        return { response:result };
+    }
+
+    async ReadCriticals(){
+        const result = await ErrorMysqlFactory.ReadCriticals();
+        return { response:result };
+    }
+
+    async ReadLast24(){
+        const result = await ErrorMysqlFactory.ReadLast24();
         return { response:result };
     }
 

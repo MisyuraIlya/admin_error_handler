@@ -1,3 +1,6 @@
+
+
+
 import React from 'react';
 import { Box, Card, CardContent, Grid, Typography } from '@mui/material';
 import { ReferenceField, TextField, useRecordContext } from 'react-admin';
@@ -11,13 +14,16 @@ const InErrorShow = () => {
                 <Grid container spacing={2}>
                     <Grid item xs={6}>
                         <Typography variant="h6" gutterBottom>
-                            Posters Galore
+                            Date
                         </Typography>
+                        <TextField source='date'/>
                     </Grid>
-                    <Grid item xs={6}>
-                        <Typography variant="h6" gutterBottom align="right">
-                            Invoice id
+                    <Grid item xs={6}  gutterBottom align="right">
+                        <Typography variant="h6">
+                            Client
                         </Typography>
+                        <TextField source='project' gutterBottom align="right"/>
+
                     </Grid>
                 </Grid>
                 <Grid container spacing={2}>
@@ -33,33 +39,32 @@ const InErrorShow = () => {
                 </Grid>
                 <Box height={20}>&nbsp;</Box>
                 <Grid container spacing={2}>
-                    <Grid item xs={6}>
+
+                    <Grid item xs={12}>
                         <Typography variant="h6" gutterBottom align="center">
-                            Date{' '}
+                            Description Error
                         </Typography>
-                        <Typography gutterBottom align="center">
-                            {new Date().toLocaleDateString()}
-                        </Typography>
+                        <TextField source='description'/>
                     </Grid>
 
-                    <Grid item xs={5}>
+                    <Grid item xs={12}>
                         <Typography variant="h6" gutterBottom align="center">
-                            the error
+                            response
                         </Typography>
-                        <ReferenceField
-                            reference="commands"
-                            source="command_id"
-                            link={false}
-                        >
-                            <TextField
-                                source="reference"
-                                align="center"
-                                component="p"
-                                gutterBottom
-                            />
-                        </ReferenceField>
+                        <TextField source='response'/>
+                    </Grid>
+
+                </Grid>
+                <Grid container spacing={2}>
+
+                    <Grid item xs={12}>
+                        <Typography variant="h6" gutterBottom align="center">
+                            parameters send
+                        </Typography>
+                        <TextField source='body'/>
                     </Grid>
                 </Grid>
+
                 <Box margin="10px 0">
                     <ReferenceField
                         reference="commands"
@@ -75,3 +80,4 @@ const InErrorShow = () => {
 };
 
 export default InErrorShow;
+

@@ -3,6 +3,8 @@ import { List, Datagrid, TextField, EmailField, EditButton, DeleteButton,  DateI
 import InErrorShow from './InErrorShow';
 import rowStyle from './rowStyle';
 import ClientChar from '../charts/ClientChar';
+import { useLocation } from 'react-router';
+
 const listFilters = [
     <DateInput source="date_gte" alwaysOn />,
     <DateInput source="date_lte" alwaysOn />,
@@ -14,7 +16,13 @@ const listFilters = [
         ]} />
 ];
 
+
+
 const ProjectData = (props) => {
+
+    const location = useLocation();
+
+    console.log(location.pathname.split('/')[2])
     
     return (
         <div style={{display:'flex'}}>

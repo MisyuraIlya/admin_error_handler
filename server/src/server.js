@@ -2,11 +2,24 @@
 import express from 'express';
 import db from './db/config.js';
 import dotenv from 'dotenv';
-
+import cors from "cors";
 import routerError from './routes/index.js';
 const app = express();
+
+app.use(cors({
+  'origin': true,
+  'methods': 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  'credentials': false,
+  'preflightContinue': false,
+  exposedHeaders: ['Content-Range']
+}));
+
+
 app.use(express.json());
+
+
 app.use('/api', routerError)
+
 
 
 async function startMysqlAndServer() {

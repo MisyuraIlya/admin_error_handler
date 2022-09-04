@@ -35,12 +35,12 @@ const Last24Hour = (props) => {
                 }}
             >
                 <TextField source='id'/>
+                <TextField source='project'/>
                 <TextField source='date'/>
-                <TextField source='time'/>
-                <TextField source='name'/>
-                <TextField source='code'/>
+                <TextField source='title'/>
                 <TextField source='status'/>
-                <TextField source='error'/>
+                <TextField source='code'/>
+                <TextField source='language'/>
             </Datagrid>
         </List>
     );

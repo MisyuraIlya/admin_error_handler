@@ -58,7 +58,7 @@ const ServicesError = () => {
                     <ListItemAvatar>
                         <ReferenceField
                             record={item}
-                            source="customer_id"
+                            source="title"
                             reference="customers"
                             link={false}
                         >

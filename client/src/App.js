@@ -15,28 +15,33 @@ import AllClients from './components/AllClients'
 import Last24Hour from './components/Last24Hour'
 import ProjectData from './components/ProjectData'
 import Api from './components/Api'
+import simpleRestProvider from 'ra-data-simple-rest';
+import ClientCreate from './components/ClientCreate'
 function App() {
 
   const [projects, setProjects] = useState([])
-  const fetchProject = async () =>{ 
-    const response = await axios.get('http://localhost:5000/projects')
-    setProjects(response.data)
-  }
-  useEffect(() => {
-    fetchProject()
-  },[])
+
+  // const fetchProject = async () =>{ 
+  //   const response = await axios.get('http://localhost:5000/projects')
+  //   setProjects(response.data)
+  // }
+
+  // useEffect(() => {
+  //   fetchProject()
+  // },[])
+
   return (
     <Admin 
     api={Api}
     dashboard={Dashboard}
-    dataProvider={restProvider('http://localhost:3000')}
+    dataProvider={restProvider('http://localhost:8085/api')}
     >
-      <Resource name='posts' list={PostList} create={PostCreate} edit={PostEdit}/>
-      <Resource name='users' list={UserList} create={UserCreate} edit={UserEdit}/>
-      <Resource name='clients' list={AllClients}  edit={ProjectData}/>
+      {/* <Resource name='posts' list={PostList} create={PostCreate} edit={PostEdit}/> */}
+      {/* <Resource name='users' list={UserList} create={UsserCreate} edit={UserEdit}/> */}
+      <Resource name='clients' list={AllClients} create={ClientCreate} edit={ProjectData}/>
       <Resource name='api' list={Api}/>
       <Resource name='last24' list={Last24Hour}/>
-      <Resource name='critical' list={Last24Hour}/>
+      <Resource name='criticals' list={Last24Hour}/>
       <Resource name='services' list={Last24Hour}/>
       {/* {projects.map((element,index) =>
         <Resource name={element.name} list={LogsList}/>

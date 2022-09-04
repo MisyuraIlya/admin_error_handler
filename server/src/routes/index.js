@@ -4,7 +4,11 @@ const routerError = new Router();
 
 routerError.get('/errors', ErrorController.ReadErrors);
 routerError.post('/errors', ErrorController.CreateErrors);
-routerError.get('/projects', ErrorController.ReadAllProjects);
+routerError.get('/clients', ErrorController.ReadAllProjects);
 routerError.get('/projects/:id', ErrorController.ReadOneProject);
-routerError.post('/projects', ErrorController.CreateProject);
+routerError.post('/clients', ErrorController.CreateProject);
+
+routerError.get('/criticals', ErrorController.ReadCriticals);
+routerError.get('/last24', ErrorController.ReadLast24);
+
 export default routerError
