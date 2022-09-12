@@ -1,9 +1,11 @@
-import React from 'react';
-import { List, Datagrid, TextField, EmailField, EditButton, DeleteButton,  DateInput, SearchInput, SelectInput } from 'react-admin'
+import React, { useEffect, useState } from 'react';
+import { List, Datagrid, TextField, EmailField, EditButton, DeleteButton,  DateInput, SearchInput, SelectInput,Pagination } from 'react-admin'
+import {Card} from '@mui/material';
 import InErrorShow from './InErrorShow';
 import rowStyle from './rowStyle';
 import ClientChar from '../charts/ClientChar';
 import { useLocation } from 'react-router';
+import axios from 'axios';
 
 const listFilters = [
     <DateInput source="date_gte" alwaysOn />,
@@ -17,20 +19,49 @@ const listFilters = [
 ];
 
 
-
 const ProjectData = (props) => {
 
-    const location = useLocation();
-
-    console.log(location.pathname.split('/')[2])
+    const [months, setMonths] = useState([])
+    const [totalErrors, setTotalErros] = useState([])
     
+    const location = useLocation();
+    let urlParameter = location.pathname.split('/')[2]
+
+    const fetchApiData = async () => {
+        
+        try{
+            const response = await axios.get(`http://localhost:8085/api/chart/${urlParameter}`)
+            console.log(response.data)
+            const monthNames = []
+            const monthTotals = []
+
+            response.data.map((item) => {
+                monthNames.push(item.monthName)
+                monthTotals.push(item.total)
+            })
+            setMonths(monthNames)
+            setTotalErros(monthTotals)
+            console.log(monthNames,monthTotals)
+        } catch(e){
+            console.log(e)
+        }
+    }
+
+    useEffect(() => {
+        fetchApiData()
+    }, [])
+
     return (
         <div style={{display:'flex'}}>
             <div style={{width:'70%'}}>
             <List 
                 filters={listFilters}
                 {...props}
+                resource={`errors/${urlParameter}`}
+                // pagination={false}
+                // actions={true}
             >
+
                 <Datagrid
                     optimized
                     rowClick="expand"
@@ -53,17 +84,21 @@ const ProjectData = (props) => {
                 >
                     <TextField source='id'/>
                     <TextField source='date'/>
-                    <TextField source='time'/>
+                    <TextField source='title'/>
                     <TextField source='name'/>
                     <TextField source='code'/>
                     <TextField source='status'/>
                     <TextField source='error'/>
                 </Datagrid>
-
             </List>
+            {/* <List  {...props} resource="clients">
+                <TextField source='title'/>
+            </List> */}
             </div>
-            <div style={{width:'30%'}}>
-            <ClientChar/>
+            <div style={{width:'30%', padding:'50px'}}>
+                <Card>
+                    <ClientChar months={months} totalErrors={totalErrors}/>
+                </Card>
 
             </div>
 

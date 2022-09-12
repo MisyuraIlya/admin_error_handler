@@ -4,9 +4,8 @@ import ErrorMysqlFactory from '../classes/factory.js'
 class ErrorService {
 
 
-    async ReadErrors(){
-
-        const result = await ErrorMysqlFactory.ReadErrors();
+    async ReadErrors(firstNum,secondNum){
+        const result = await ErrorMysqlFactory.ReadAllErrors(firstNum,secondNum);
         return { response:result };
     }
 
@@ -22,10 +21,11 @@ class ErrorService {
         return { response: result }
     }
     
-    async ReadOneProject(id){
+    async ReadOneProject(id, firstNum, secondNum, searchFilter, dateFrom, dateTo){
         const getId = await ErrorMysqlFactory.ReadOneProject(id);
-        const result = await ErrorMysqlFactory.GetErrorsPerProject(getId[0].title)
-        return { response: result }
+        const result = await ErrorMysqlFactory.GetErrorsPerProject(getId[0].title,firstNum,secondNum, searchFilter, dateFrom, dateTo)
+        let total = Object.values(result.total[0])[0]
+        return { response: result.result, total:total }
     }
 
     async CreateProject(title){
@@ -45,6 +45,25 @@ class ErrorService {
         return { response:result };
     }
 
+
+
+  
+    async CriticalYear(){
+      const result = await ErrorMysqlFactory.CriticalYear();
+      return { response:result };
+    }
+  
+
+    async charId(id){
+      const nameProject = await ErrorMysqlFactory.ReadOneProject(id);
+      const result = await ErrorMysqlFactory.charId(nameProject);
+      return { response:result };
+    }
+
+  
+
+
+  
 
 }
 

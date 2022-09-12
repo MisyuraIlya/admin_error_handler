@@ -17,18 +17,8 @@ import ProjectData from './components/ProjectData'
 import Api from './components/Api'
 import simpleRestProvider from 'ra-data-simple-rest';
 import ClientCreate from './components/ClientCreate'
+
 function App() {
-
-  const [projects, setProjects] = useState([])
-
-  // const fetchProject = async () =>{ 
-  //   const response = await axios.get('http://localhost:5000/projects')
-  //   setProjects(response.data)
-  // }
-
-  // useEffect(() => {
-  //   fetchProject()
-  // },[])
 
   return (
     <Admin 

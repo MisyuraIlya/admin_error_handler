@@ -1,20 +1,21 @@
 import React from 'react';
 import { Line } from "react-chartjs-2";
 import Chart from 'chart.js/auto';
-const DashboardChar = () => {
+import {Card} from '@mui/material';
 
+const DashboardChar = ({months,totalErrors}) => {
 
     return (
-        <div>
+        <Card>
             <Line
        data={{
        // x-axis label values
-       labels: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday","Sunday"],
+       labels: months,
        datasets: [
           {
               label: "# of Calories Lost",
               // y-axis data plotting values
-              data: [200, 300, 1300, 520, 2000, 350,150],
+              data: totalErrors,
               fill: false,
               borderWidth:4,
               backgroundColor: "rgb(255, 99, 132)",
@@ -24,7 +25,7 @@ const DashboardChar = () => {
           ],
         }}
       />
-        </div>
+        </Card>
     );
 };
 

@@ -1,13 +1,17 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Welcome from '../components/Welcome';
 import MonthlyRevenue from '../components/MonthlyRevenue';
 import NbNewOrders from '../components/NbNewOrders';
 import ErrorReviews from '../components/ErrorReviews';
 import ServicesError from '../components/ServicesError';
 import DashboardChar from '../charts/DashboardChar';
+import axios from 'axios';
+
 const Spacer = () => <span style={{ width: '1em' }} />;
 
 const Dashboard = () => {
+    const [months, setMonths] = useState([])
+    const [totalErrors, setTotalErros] = useState([])
 
     const styles = {
         flex: { display: 'flex' },
@@ -16,6 +20,29 @@ const Dashboard = () => {
         rightCol: { flex: 1, marginLeft: '0.5em' },
         singleCol: { marginTop: '1em', marginBottom: '1em' },
     };
+
+    const fetchApiData = async () => {
+        try{
+            const response = await axios.get('http://localhost:8085/api/chart/criticals')
+            console.log(response.data)
+            const monthNames = []
+            const monthTotals = []
+
+            response.data.map((item) => {
+                monthNames.push(item.monthName)
+                monthTotals.push(item.total)
+            })
+            setMonths(monthNames)
+            setTotalErros(monthTotals)
+            console.log(monthNames,monthTotals)
+        } catch(e){
+            console.log(e)
+        }
+    }
+
+    useEffect(() => {
+        fetchApiData()
+    }, [])
 
     return (
         <>
@@ -33,7 +60,7 @@ const Dashboard = () => {
 
                     </div>
                     <div style={styles.singleCol}>
-                            <DashboardChar/>
+                            <DashboardChar months={months} totalErrors={totalErrors}/>
                          </div>
                 </div>
                 

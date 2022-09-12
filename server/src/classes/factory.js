@@ -1,4 +1,5 @@
 import db from "../db/config.js";
+import moment from 'moment-timezone';
 
 function query(sql,params) {
     return new Promise((resolve, reject) => {
@@ -17,10 +18,10 @@ function query(sql,params) {
 
     }
 
-    async ReadAllErrors(){
-        let sql = 'SELECT * FROM errors';
+    async ReadAllErrors(firstNum,secondNum){
+        let sql = 'SELECT * FROM errors LIMIT ?,?';
         try{
-          const result = await query(sql);
+          const result = await query(sql,[parseInt(firstNum),parseInt(secondNum)]);
           return result
 
         }catch(e){
@@ -60,11 +61,25 @@ function query(sql,params) {
       }
     }
 
-    async GetErrorsPerProject(title){
-      let sql = 'SELECT * FROM errors WHERE project = ?';
+    async getTotal(id){
+      let sql = "SELECT COUNT(*) FROM `errors` WHERE `project` = ? "
       try{
-        const result = await query(sql,[title]);
+        const result = await query(sql,[id]);
         return result
+      } catch(e){
+        console.log(e)
+      }
+    }
+
+    async GetErrorsPerProject(title, firstNum, secondNum, searchFilter, dateFrom, dateTo ){
+      let filterDate =  dateFrom && dateTo ? `AND date BETWEEN '${dateFrom}' AND '${dateTo}'` : `AND 1=1`
+      let filter = searchFilter ? `AND title LIKE '%${searchFilter}%'` : `AND 1=1`
+      let sqlTotal = `SELECT COUNT(*) FROM errors WHERE project = ? ${filterDate} ${filter}`;
+      let sql = `SELECT * FROM errors WHERE project = ? ${filterDate} ${filter} LIMIT ? OFFSET ?`;
+      try{
+        let resultTotal = await query(sqlTotal,[title, parseInt(firstNum), parseInt(secondNum)]);
+        let result = await query(sql,[title, parseInt(firstNum), parseInt(secondNum)]);
+        return {result:result, total:resultTotal }
       } catch(e){
         console.log(e)
       }
@@ -95,7 +110,6 @@ function query(sql,params) {
       try{
         const result = await query(sql);
         return result
-
       }catch(e){
         console.log(e)
       }
@@ -106,11 +120,53 @@ function query(sql,params) {
       try{
         const result = await query(sql);
         return result
-
       }catch(e){
         console.log(e)
       }
     }
+
+    async CriticalYear(){
+      try{
+        let data = []
+        for(let i = 1; i < 13 ; i++){
+          let sql = `SELECT COUNT(*) FROM errors WHERE MONTH(date)=${i}`
+          let result = await query(sql);
+          let obj = {
+            monthNumber:i,
+            monthName: moment(i, 'MM').format('MMMM'),
+            total:Object.values(result[0])[0]
+          }
+          console.log(obj)
+          data.push(obj)
+        }
+        return data
+      }catch(e){
+        console.log(e)
+      }
+    }
+
+    async charId(nameProject){
+      try{
+        let data = []
+        for(let i = 1; i < 13 ; i++){
+          let sql = `SELECT COUNT(*) FROM errors WHERE project = ? AND MONTH(date)=${i}`
+          let result = await query(sql,[Object.values(nameProject[0])[1]]);
+          let obj = {
+            monthNumber:i,
+            monthName: moment(i, 'MM').format('MMMM'),
+            total:Object.values(result[0])[0]
+          }
+          console.log(obj)
+          data.push(obj)
+        }
+        return data
+      }catch(e){
+        console.log(e)
+      }
+
+    }
+
+
 
   }
 

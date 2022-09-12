@@ -9,15 +9,6 @@ import icon from '../images/critical.svg'
 import axios from 'axios';
 
 
-// const data = [
-//     {id:'1', title:'Churi', error:'cannot fetch data'},
-//     {id:'2', title:'Churi', error:'cannot fetch data'},
-//     {id:'3', title:'Churi', error:'cannot fetch data'},
-//     {id:'4', title:'Churi', error:'cannot fetch data'},
-//     {id:'5', title:'Churi', error:'cannot fetch data'},
-    
-// ]
-
 const ErrorReviews = () => {
 
     const [data, setData] = useState([]);
@@ -37,7 +28,7 @@ const ErrorReviews = () => {
         fetchData()
     },[])
     return (
-        <CardWithIcon
+    <CardWithIcon
         to={{
             pathname: '/criticals',
             // search: stringify({
