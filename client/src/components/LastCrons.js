@@ -3,20 +3,20 @@ import {Avatar,Box,Button,List,ListItem,ListItemAvatar,ListItemText,} from '@mui
 import CommentIcon from '@mui/icons-material/Comment';
 import { Link } from 'react-router-dom';
 import CardWithIcon from './CardWithIcon';
-import {ReferenceField,FunctionField,useGetList,useTranslate,useIsDataLoaded,} from 'react-admin';
+import {ReferenceField,FunctionField,useGetList,useTranslate,useIsDataLoaded,UrlField} from 'react-admin';
 import cartouche from '../images/red-cartouche.png'
 import icon from '../images/critical.svg'
 import axios from 'axios';
 
 
-const ErrorReviews = () => {
+const LastCrons = () => {
 
     const [data, setData] = useState([]);
 
     const fetchData = async () => {
         
         try {
-            const data = await axios.get('http://localhost:8085/api/last10critial');
+            const data = await axios.get('http://localhost:8085/api/last10crons');
             console.log('aaa',data.data.result)
             setData(data.data.result);
         } catch(e){
@@ -30,7 +30,7 @@ const ErrorReviews = () => {
     return (
     <CardWithIcon
         to={{
-            pathname: '/criticals',
+            pathname: '/crons',
             // search: stringify({
             //     filter: JSON.stringify({ status: 'pending' }),
             // }),
@@ -48,13 +48,16 @@ const ErrorReviews = () => {
                     key={item.id}
                     button
                     component={Link}
-                    to={`/criticals/${item.id}`}
+                    to={{
+                        pathname: item.link,
+                    }}
+                    // to={item.link}
                     alignItems="flex-start"
                 >
                     <ListItemAvatar>
                         <ReferenceField
                             record={item}
-                            source="title"
+                            source="name"
                             reference="customers"
                             link={false}
                         >
@@ -72,8 +75,8 @@ const ErrorReviews = () => {
                     </ListItemAvatar>
 
                     <ListItemText
-                        primary={item.project}
-                        secondary={item.description}
+                        primary={item.name}
+                        secondary={item.link}
                         sx={{
                             overflowY: 'hidden',
                             height: '4em',
@@ -86,6 +89,7 @@ const ErrorReviews = () => {
                 </ListItem>
             ))}
         </List>
+
         <Box flexGrow={1}>&nbsp;</Box>
         <Button
             sx={{ borderRadius: 0 }}
@@ -102,4 +106,4 @@ const ErrorReviews = () => {
     );
 };
 
-export default ErrorReviews;
+export default LastCrons;

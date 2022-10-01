@@ -6,6 +6,7 @@ import ErrorReviews from '../components/ErrorReviews';
 import ServicesError from '../components/ServicesError';
 import DashboardChar from '../charts/DashboardChar';
 import axios from 'axios';
+import LastCrons from '../components/LastCrons';
 
 const Spacer = () => <span style={{ width: '1em' }} />;
 
@@ -68,7 +69,7 @@ const Dashboard = () => {
                     <div style={styles.flex}>
                         <ErrorReviews />
                         <Spacer />
-                        <ServicesError />
+                        <LastCrons />
                     </div>
                 </div>
             </div>

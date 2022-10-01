@@ -10,7 +10,7 @@ const ClientChar = ({months,totalErrors}) => {
        labels: months,
        datasets: [
           {
-              label: "# of Calories Lost",
+              label: "Client Errors",
               // y-axis data plotting values
               data: totalErrors,
               fill: false,

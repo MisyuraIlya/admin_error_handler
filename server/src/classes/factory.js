@@ -41,11 +41,14 @@ function query(sql,params) {
       }
     }
 
-    async ReadAllProjects(){
-      let sql = 'SELECT * FROM projects';
+    async ReadAllProjects(firstNum, secondNum, searchFilter){
+        let filter = searchFilter ? `WHERE title LIKE '%${searchFilter}%'` : `WHERE 1=1 `
+        let sql = `SELECT * FROM projects  ${filter} LIMIT ? OFFSET ?`;
+        let sqlTotal = `SELECT COUNT(*) FROM projects ${filter}`;
       try{
-        const result = await query(sql);
-        return result
+        const resultTotal = await query(sqlTotal);
+        const result = await query(sql,[ parseInt(firstNum), parseInt(secondNum)]);
+        return {result:result, total:resultTotal }
       } catch(e) {
         console.log(e)
       }
@@ -105,21 +108,33 @@ function query(sql,params) {
       }
     }
 
-    async ReadCriticals(){
-      let sql = "SELECT * FROM `errors` WHERE `status` = 'critical'";
+    async ReadCriticals(firstNum, secondNum, searchFilter, dateFrom, dateTo ){
+      let filterDate =  dateFrom && dateTo ? `AND date BETWEEN '${dateFrom}' AND '${dateTo}'` : `AND 1=1`
+      let filter = searchFilter ? `AND title LIKE '%${searchFilter}%'` : `AND 1=1`
+      let sqlTotal = `SELECT COUNT(*) FROM errors WHERE status = 'critical' ${filterDate} ${filter}`;
+
+      let sql = "SELECT * FROM `errors` WHERE `status` = 'critical' LIMIT ? OFFSET ?";
       try{
-        const result = await query(sql);
-        return result
+        let resultTotal = await query(sqlTotal,[parseInt(firstNum), parseInt(secondNum)]);
+        const result = await query(sql,[parseInt(firstNum), parseInt(secondNum)]);
+        return {result:result, total:resultTotal }
       }catch(e){
         console.log(e)
       }
     }
     
-    async ReadLast24(){
+    async ReadLast24(firstNum, secondNum, searchFilter, dateFrom, dateTo){
+      let filterDate =  dateFrom && dateTo ? `AND date BETWEEN '${dateFrom}' AND '${dateTo}'` : `AND 1=1`
+      let filter = searchFilter ? `AND title LIKE '%${searchFilter}%'` : `AND 1=1`
+      let sqlTotal = `SELECT COUNT(*) FROM errors WHERE date >= NOW() - INTERVAL 1 DAY ${filterDate} ${filter}`;
+
       let sql = "SELECT * FROM `errors` WHERE date >= NOW() - INTERVAL 1 DAY";
       try{
-        const result = await query(sql);
-        return result
+
+        let resultTotal = await query(sqlTotal,[parseInt(firstNum), parseInt(secondNum)]);
+        const result = await query(sql,[parseInt(firstNum), parseInt(secondNum)]);
+        console.log('12',result)
+        return {result:result, total:resultTotal }
       }catch(e){
         console.log(e)
       }
@@ -136,7 +151,6 @@ function query(sql,params) {
             monthName: moment(i, 'MM').format('MMMM'),
             total:Object.values(result[0])[0]
           }
-          console.log(obj)
           data.push(obj)
         }
         return data
@@ -156,7 +170,6 @@ function query(sql,params) {
             monthName: moment(i, 'MM').format('MMMM'),
             total:Object.values(result[0])[0]
           }
-          console.log(obj)
           data.push(obj)
         }
         return data
@@ -165,6 +178,16 @@ function query(sql,params) {
       }
 
     }
+
+    async ReadLast10Criticals(){
+      let sql = "SELECT * from `errors` where status = 'critical' ORDER BY Id DESC LIMIT 10";
+      try{
+        const result = await query(sql);
+        return {result:result}
+      }catch(e){
+        console.log(e)
+      }
+  }
 
 
 

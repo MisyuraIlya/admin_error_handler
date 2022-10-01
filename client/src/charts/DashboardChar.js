@@ -13,7 +13,7 @@ const DashboardChar = ({months,totalErrors}) => {
        labels: months,
        datasets: [
           {
-              label: "# of Calories Lost",
+              label: "Critical errors",
               // y-axis data plotting values
               data: totalErrors,
               fill: false,

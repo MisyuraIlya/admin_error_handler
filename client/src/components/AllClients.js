@@ -25,11 +25,11 @@ const AllClients = (props) => {
             >
                 <TextField source='id'/>
                 <TextField source='title' reference="about"/>
-                <ReferenceField source="id" reference="commands">
+                {/* <ReferenceField source="id" reference="commands">
                     <TextField source="id" />
-                </ReferenceField>
+                </ReferenceField> */}
                 <BooleanField source="title" />
-            <EditButton />
+            {/* <EditButton /> */}
             </Datagrid>
         </List>
     );

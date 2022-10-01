@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { List, Datagrid, TextField, EmailField, EditButton, DeleteButton,  DateInput, SearchInput, SelectInput,Pagination } from 'react-admin'
+import { List, Datagrid, TextField, EmailField, EditButton, DeleteButton,  DateInput, SearchInput, SelectInput,Pagination, UrlField } from 'react-admin'
 import {Card} from '@mui/material';
 import InErrorShow from './InErrorShow';
 import rowStyle from './rowStyle';
 import ClientChar from '../charts/ClientChar';
 import { useLocation } from 'react-router';
 import axios from 'axios';
-
+import CronData from './CronData';
 const listFilters = [
     <DateInput source="date_gte" alwaysOn />,
     <DateInput source="date_lte" alwaysOn />,
@@ -16,6 +16,12 @@ const listFilters = [
         { id: 'lifestyle', name: 'medium' },
         { id: 'photography', name: 'light' },
         ]} />
+];
+
+const cronFilter = [
+    <DateInput source="cron_date_gte" alwaysOn />,
+    <DateInput source="cron_date_lte" alwaysOn />,
+    <SearchInput source="c" alwaysOn />,
 ];
 
 
@@ -52,6 +58,8 @@ const ProjectData = (props) => {
     }, [])
 
     return (
+        <div>
+
         <div style={{display:'flex'}}>
             <div style={{width:'70%'}}>
             <List 
@@ -103,6 +111,10 @@ const ProjectData = (props) => {
             </div>
 
         </div>
+
+
+    </div>
+
     );
 };
 

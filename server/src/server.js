@@ -5,7 +5,7 @@ import dotenv from 'dotenv';
 import cors from "cors";
 import routerError from './routes/index.js';
 import paginate from 'express-paginate'
-
+import routerExecuter from './routes/executeRouter.js';
 const app = express();
 
 app.use(cors({
@@ -21,6 +21,7 @@ app.use(express.json());
 app.use(paginate.middleware(10, 50));
 
 app.use('/api', routerError)
+app.use('/api', routerExecuter)
 
 
 

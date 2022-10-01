@@ -1,10 +1,8 @@
 import ErrorService from "../service/error-service.js";
 
 const sendResponse = (response , data = null, firstNum = null, secondNum = null) => {
-  console.log(data.total)
     return response
     .set("Content-Range", `erros 0-4/${data.total}` )
-    .header('X-Total-Count',  `erros 0-4/${data.total}`)
     .json(data.response);
 }
 
@@ -38,10 +36,17 @@ Array.from({ length }, (_, i) => start + i);
     }
 
     async ReadAllProjects(request, response){
+      const params = request.query.range;
+      const firstNum = params.split(/\,|\s|\[|\]/)[1]
+      const secondNum = params.split(/\,|\s|\[|\]/)[2]
+      let PageIndex = firstNum;
+      let TotalRows = range(firstNum, secondNum).length;
+      const searchFilter = JSON.parse(request.query.filter).q
       try{   
-        const result = await ErrorService.ReadAllProjects()
-        
-        sendResponse(response, result);
+        // const result = await ErrorService.ReadAllProjects(firstNum, secondNum, TotalRows,PageIndex, searchFilter)
+        const result = await ErrorService.ReadAllProjects(TotalRows,PageIndex, searchFilter)
+        console.log(result)
+        sendResponse(response, result,firstNum, secondNum );
       } catch (error) {
         console.log(error)
         response.sendStatus(500);
@@ -59,14 +64,20 @@ Array.from({ length }, (_, i) => start + i);
         const dateTo = JSON.parse(request.query.filter).date_lte
         let PageIndex = firstNum;
         let TotalRows = range(firstNum, secondNum).length;
-        // let OFFSET = PageIndex;
-        // let till = OFFSET + PerPageATZeroIndex;
-        console.log('1',dateFrom,dateTo)
         const result = await ErrorService.ReadOneProject(id,TotalRows,PageIndex, searchFilter, dateFrom, dateTo )
         sendResponse(response, result,firstNum, secondNum );
       } catch (error) {
         console.log(error)
         response.sendStatus(500);
+      }
+    }
+
+    async ReadLast10Criticals(request, response){
+      try{
+        const result = await ErrorService.ReadLast10Criticals()
+        sendResponse(response,result);
+      }catch (error){
+        console.log(error)
       }
     }
 
@@ -82,9 +93,17 @@ Array.from({ length }, (_, i) => start + i);
     }
 
     async ReadCriticals(request, response){
+      const params = request.query.range;
+      const searchFilter = JSON.parse(request.query.filter).q
+      const firstNum = params.split(/\,|\s|\[|\]/)[1]
+      const secondNum = params.split(/\,|\s|\[|\]/)[2]
+      const dateFrom = JSON.parse(request.query.filter).date_gte
+      const dateTo = JSON.parse(request.query.filter).date_lte
+      let PageIndex = firstNum;
+      let TotalRows = range(firstNum, secondNum).length;
       try{   
-        const result = await ErrorService.ReadCriticals()
-        sendResponse(response,result)
+        const result = await ErrorService.ReadCriticals(TotalRows,PageIndex, searchFilter, dateFrom, dateTo)
+        sendResponse(response, result,firstNum, secondNum );
       } catch (error) {
         console.log(error)
         response.sendStatus(500);
@@ -92,9 +111,18 @@ Array.from({ length }, (_, i) => start + i);
     }
 
     async ReadLast24(request, response){
+      const params = request.query.range;
+      const searchFilter = JSON.parse(request.query.filter).q
+      const firstNum = params.split(/\,|\s|\[|\]/)[1]
+      const secondNum = params.split(/\,|\s|\[|\]/)[2]
+      const dateFrom = JSON.parse(request.query.filter).date_gte
+      const dateTo = JSON.parse(request.query.filter).date_lte
+      let PageIndex = firstNum;
+      let TotalRows = range(firstNum, secondNum).length;
+
       try{   
-        const result = await ErrorService.ReadLast24()
-        sendResponse(response,result)
+        const result = await ErrorService.ReadLast24(TotalRows,PageIndex, searchFilter, dateFrom, dateTo)
+        sendResponse(response, result,firstNum, secondNum )
       } catch (error) {
         console.log(error)
         response.sendStatus(500);
