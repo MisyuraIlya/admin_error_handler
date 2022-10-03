@@ -2,7 +2,7 @@ import React from 'react';
 import { CopyBlock,dracula } from "react-code-blocks";
 import { Box, Card, CardActions, Button, Typography } from '@mui/material';
 
-const PhpCode = () => {
+const PhpCode8 = () => {
 
 
 const phpClass = 
@@ -62,20 +62,7 @@ class adminError{
   }
 ?>
 `
-const php7 = 
-`
-<?php
-    function someNoneExistentFunction ($num1,$num2){
-        return $num1 * $num2;
-    }
-    try {
-        someNoneExistentFunction(1);
-    } catch (Error $e) {
-        $adminHandler = new adminError('php Test Project','function title',$e->getCode(),'critical',null,$e->getMessage(),null);
-        $adminHandler->post();
-    }
-?>
-`
+
 
 const php8 = 
 `
@@ -115,19 +102,18 @@ const php8 =
             />
 
             <Typography variant="body1" component="p" gutterBottom>
-                PHP 7
+               PHP 8
             </Typography>
             <CopyBlock
-                text={php7}
+                text={php8}
                 language={'php'}
                 showLineNumbers={true}
                 theme={dracula}
                 wrapLines={true}
                 codeBlock
             />
-
         </div>
     );
 };
 
-export default PhpCode;
+export default PhpCode8;
