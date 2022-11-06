@@ -1,10 +1,6 @@
-import ErrorService from "../service/error-service.js";
+import ErrorService from "../service/ErrorService.js";
+import SendResponse from "../Classes/SendResponse.js";
 
-const sendResponse = (response , data = null, firstNum = null, secondNum = null) => {
-    return response
-    .set("Content-Range", `erros 0-4/${data.total}` )
-    .json(data.response);
-}
 
 const range = (start, end, length = end - start + 1) =>
 Array.from({ length }, (_, i) => start + i);
@@ -18,40 +14,24 @@ Array.from({ length }, (_, i) => start + i);
       const secondNum = params.split(/\,|\s|\[|\]/)[2]
         try{   
           const result = await ErrorService.ReadErrors(firstNum,secondNum)
-          sendResponse(response,result);
+          SendResponse(response,result);
         } catch (error) {
           console.log(error)
           response.sendStatus(500);
         }
     }
 
-    async CreateErrors(request, response){
+    async CreateErrors(request, responseFunc){
       try{
         const {project,title,code,status,description, response, body, language} = request.body;
         const result = await ErrorService.CreateError(project,title,code,status,description,response, body,language)
-        sendResponse(response,200,'succsess');
+        SendResponse(responseFunc, result);
       }catch (error){
         console.log(error)
       }
     }
 
-    async ReadAllProjects(request, response){
-      const params = request.query.range;
-      const firstNum = params.split(/\,|\s|\[|\]/)[1]
-      const secondNum = params.split(/\,|\s|\[|\]/)[2]
-      let PageIndex = firstNum;
-      let TotalRows = range(firstNum, secondNum).length;
-      const searchFilter = JSON.parse(request.query.filter).q
-      try{   
-        // const result = await ErrorService.ReadAllProjects(firstNum, secondNum, TotalRows,PageIndex, searchFilter)
-        const result = await ErrorService.ReadAllProjects(TotalRows,PageIndex, searchFilter)
-        console.log(result)
-        sendResponse(response, result,firstNum, secondNum );
-      } catch (error) {
-        console.log(error)
-        response.sendStatus(500);
-      }
-    }
+
 
     async ReadOneProject(request, response){
       try{   
@@ -65,7 +45,7 @@ Array.from({ length }, (_, i) => start + i);
         let PageIndex = firstNum;
         let TotalRows = range(firstNum, secondNum).length;
         const result = await ErrorService.ReadOneProject(id,TotalRows,PageIndex, searchFilter, dateFrom, dateTo )
-        sendResponse(response, result,firstNum, secondNum );
+        SendResponse(response, result,firstNum, secondNum );
       } catch (error) {
         console.log(error)
         response.sendStatus(500);
@@ -75,22 +55,13 @@ Array.from({ length }, (_, i) => start + i);
     async ReadLast10Criticals(request, response){
       try{
         const result = await ErrorService.ReadLast10Criticals()
-        sendResponse(response,result);
+        SendResponse(response,result);
       }catch (error){
         console.log(error)
       }
     }
 
-    async CreateProject(request, response){
-      try{   
-        const {title} = request.body;
-        const result = await ErrorService.CreateProject(title)
-        sendResponse(response,result);
-      } catch (error) {
-        console.log(error)
-        response.sendStatus(500);
-      }
-    }
+
 
     async ReadCriticals(request, response){
       const params = request.query.range;
@@ -103,7 +74,7 @@ Array.from({ length }, (_, i) => start + i);
       let TotalRows = range(firstNum, secondNum).length;
       try{   
         const result = await ErrorService.ReadCriticals(TotalRows,PageIndex, searchFilter, dateFrom, dateTo)
-        sendResponse(response, result,firstNum, secondNum );
+        SendResponse(response, result,firstNum, secondNum );
       } catch (error) {
         console.log(error)
         response.sendStatus(500);
@@ -122,7 +93,7 @@ Array.from({ length }, (_, i) => start + i);
 
       try{   
         const result = await ErrorService.ReadLast24(TotalRows,PageIndex, searchFilter, dateFrom, dateTo)
-        sendResponse(response, result,firstNum, secondNum )
+        SendResponse(response, result,firstNum, secondNum )
       } catch (error) {
         console.log(error)
         response.sendStatus(500);
@@ -132,7 +103,7 @@ Array.from({ length }, (_, i) => start + i);
     async AllWeek(request, response){
       try{   
         const result = await ErrorService.AllWeek()
-        sendResponse(response,result)
+        SendResponse(response,result)
       } catch (error) {
         response.sendStatus(500);
       }
@@ -142,7 +113,7 @@ Array.from({ length }, (_, i) => start + i);
     async CriticalYear(request, response){
       try{   
         const result = await ErrorService.CriticalYear()
-        sendResponse(response,result)
+        SendResponse(response,result)
       } catch (error) {
         response.sendStatus(500);
       } 
@@ -152,7 +123,7 @@ Array.from({ length }, (_, i) => start + i);
       const {id} = request.params;
       try{   
         const result = await ErrorService.charId(id)
-        sendResponse(response,result)
+        SendResponse(response,result)
       } catch (error) {
         response.sendStatus(500);
       } 

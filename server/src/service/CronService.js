@@ -1,5 +1,4 @@
-import ExecuteFactory from "../classes/execute-factory.js";
-import ErrorMysqlFactory from '../classes/factory.js'
+import CronFactory from "../DAL/CronFactory.js";
 
 function splitStringBySegmentLength(source, segmentLength) {
     if (!segmentLength || segmentLength < 1) throw Error('Segment length must be defined and greater than/equal to 1');
@@ -11,12 +10,12 @@ function splitStringBySegmentLength(source, segmentLength) {
     return target;
 }
 
-class ExecuteService {
+class CronService {
 
 
     
     async ReadTest(){
-        const result = await ExecuteFactory.ReadTest();
+        const result = await CronFactory.ReadTest();
         const data = splitStringBySegmentLength(result.response, 100000);
         const total = data.length
         // .match(/.{1,10000}/g)
@@ -27,15 +26,15 @@ class ExecuteService {
     async ReadCronList(id,TotalRows,PageIndex, searchFilter, dateFrom, dateTo,firstNum,secondNum){
         
         const name = await ErrorMysqlFactory.ReadOneProject(id);
-        const result = await ExecuteFactory.ReadCronList(name[0].title,TotalRows,PageIndex, searchFilter, dateFrom, dateTo,firstNum,secondNum);
+        const result = await CronFactory.ReadCronList(name[0].title,TotalRows,PageIndex, searchFilter, dateFrom, dateTo,firstNum,secondNum);
 
         return { response: result.result, total:result.total }
     }
 
     async ReadLast10Crons(){
-        const result = await ExecuteFactory.ReadLast10Crons();
+        const result = await CronFactory.ReadLast10Crons();
         return { response:result};
     }
 }
 
-export default new ExecuteService();
+export default new CronService();

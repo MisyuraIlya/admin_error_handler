@@ -36,7 +36,7 @@ const ProjectData = (props) => {
     const fetchApiData = async () => {
         
         try{
-            const response = await axios.get(`http://localhost:8085/api/chart/${urlParameter}`)
+            const response = await axios.get(`http://localhost:5000/api/chart/${urlParameter}`)
             console.log(response.data)
             const monthNames = []
             const monthTotals = []

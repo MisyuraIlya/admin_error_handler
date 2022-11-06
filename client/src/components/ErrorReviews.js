@@ -16,7 +16,7 @@ const ErrorReviews = () => {
     const fetchData = async () => {
         
         try {
-            const data = await axios.get('http://localhost:8085/api/last10critial');
+            const data = await axios.get('http://localhost:5000/api/last10critial');
             console.log('aaa',data.data.result)
             setData(data.data.result);
         } catch(e){

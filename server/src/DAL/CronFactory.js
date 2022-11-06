@@ -13,7 +13,7 @@ function query(sql,params) {
   }
 
 
-  class ExecuteFactory {
+  class CronFactory {
     constructor() {}
 
     async ReadTest(){
@@ -78,4 +78,4 @@ function query(sql,params) {
   }
 
 
-export default new ExecuteFactory();
+export default new CronFactory();

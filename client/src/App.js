@@ -26,7 +26,7 @@ function App() {
     api={Api}
     // cron={CronData}
     dashboard={Dashboard}
-    dataProvider={restProvider('http://localhost:8085/api')}
+    dataProvider={restProvider('http://localhost:5000/api')}
     >
       {/* <Resource name='posts' list={PostList} create={PostCreate} edit={PostEdit}/> */}
       {/* <Resource name='users' list={UserList} create={UsserCreate} edit={UserEdit}/> */}

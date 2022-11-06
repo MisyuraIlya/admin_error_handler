@@ -13,7 +13,7 @@ function query(sql,params) {
   }
 
 
-  class ErrorMysqlFactory {
+  class ErrorFactory {
     constructor() {
 
     }
@@ -41,18 +41,7 @@ function query(sql,params) {
       }
     }
 
-    async ReadAllProjects(firstNum, secondNum, searchFilter){
-        let filter = searchFilter ? `WHERE title LIKE '%${searchFilter}%'` : `WHERE 1=1 `
-        let sql = `SELECT * FROM projects  ${filter} LIMIT ? OFFSET ?`;
-        let sqlTotal = `SELECT COUNT(*) FROM projects ${filter}`;
-      try{
-        const resultTotal = await query(sqlTotal);
-        const result = await query(sql,[ parseInt(firstNum), parseInt(secondNum)]);
-        return {result:result, total:resultTotal }
-      } catch(e) {
-        console.log(e)
-      }
-    }
+
 
     async ReadOneProject(id){
       let sql = 'SELECT * FROM projects WHERE id = ?';
@@ -88,14 +77,7 @@ function query(sql,params) {
       }
     }
 
-    async CreateProject(title){
-      const sql = 'INSERT INTO projects title VALUES ?';
-      try{
-        const result = await query(sql, [title])
-      } catch(e) {
-        console.log(e)
-      }
-    }
+
 
     async CreateProject(title){
       const sql = 'INSERT INTO projects ( title ) VALUES (?)';
@@ -194,4 +176,4 @@ function query(sql,params) {
   }
 
 
-export default new ErrorMysqlFactory();
+export default new ErrorFactory();

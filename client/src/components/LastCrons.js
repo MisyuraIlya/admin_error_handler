@@ -16,7 +16,7 @@ const LastCrons = () => {
     const fetchData = async () => {
         
         try {
-            const data = await axios.get('http://localhost:8085/api/last10crons');
+            const data = await axios.get('http://localhost:5000/api/last10crons');
             console.log('aaa',data.data.result)
             setData(data.data.result);
         } catch(e){

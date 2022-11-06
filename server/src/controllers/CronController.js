@@ -1,4 +1,4 @@
-import ExecuteService from "../service/execute-service.js";
+import CronService from "../service/CronService.js";
 
 const sendResponse = (response , data = null, firstNum = null, secondNum = null) => {
       return response
@@ -10,11 +10,11 @@ const sendResponse = (response , data = null, firstNum = null, secondNum = null)
   Array.from({ length }, (_, i) => start + i);
 
 
-  class ExecuteController {
+  class CronController {
 
     async ReadTest(request, response) {
       try{   
-        const result = await ExecuteService.ReadTest()
+        const result = await CronService.ReadTest()
         sendResponse(response,result);
       } catch (error) {
         console.log(error)
@@ -34,7 +34,7 @@ const sendResponse = (response , data = null, firstNum = null, secondNum = null)
       let TotalRows = range(firstNum, secondNum).length;
 
       try{   
-        const result = await ExecuteService.ReadCronList(id,TotalRows,PageIndex, searchFilter, dateFrom, dateTo,firstNum,secondNum)
+        const result = await CronService.ReadCronList(id,TotalRows,PageIndex, searchFilter, dateFrom, dateTo,firstNum,secondNum)
         sendResponse(response, result,firstNum, secondNum );
       } catch (error) {
         console.log(error)
@@ -44,7 +44,7 @@ const sendResponse = (response , data = null, firstNum = null, secondNum = null)
 
     async ReadLast10Crons (request, response){
       try{   
-        const result = await ExecuteService.ReadLast10Crons()
+        const result = await CronService.ReadLast10Crons()
         sendResponse(response, result );
       } catch (error) {
         console.log(error)
@@ -55,4 +55,4 @@ const sendResponse = (response , data = null, firstNum = null, secondNum = null)
   }
   
   
-  export default new ExecuteController();
+  export default new CronController();

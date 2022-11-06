@@ -3,9 +3,13 @@ import express from 'express';
 import db from './db/config.js';
 import dotenv from 'dotenv';
 import cors from "cors";
-import routerError from './routes/index.js';
 import paginate from 'express-paginate'
-import routerExecuter from './routes/executeRouter.js';
+
+import routerError from './routes/ErrorRouter.js';
+import routerClient from './routes/ClientRouter.js';
+import routerCron from './routes/CronRouter.js';
+
+
 const app = express();
 
 app.use(cors({
@@ -21,14 +25,15 @@ app.use(express.json());
 app.use(paginate.middleware(10, 50));
 
 app.use('/api', routerError)
-app.use('/api', routerExecuter)
+app.use('/api', routerClient)
+app.use('/api', routerCron)
 
 
 
 async function startMysqlAndServer() {
     try {
       await db.connect((err) => { if (err) throw err; console.log('DB Connected!'); });
-      app.listen(process.env.PORT || '8085', () => { console.log(`Server is running on port : ${process.env.PORT || '8085'}`); });
+      app.listen(process.env.PORT || '5000', () => { console.log(`Server is running on port : ${process.env.PORT || '5000'}`); });
     } catch (error) {
       console.log(error);
     }
