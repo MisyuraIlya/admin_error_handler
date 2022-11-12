@@ -9,9 +9,19 @@ class ClientService {
         return { response: result.result, total:total }
     }
     
-    async CreateProject(title){
+    async CreateProject(title,image,develop_mode){
+        let mode = 0;
+        if(develop_mode){
+            mode = 1
+        }
+        const result = await ClientFactory.CreateProject(title,image,mode);
+        const findProd = await ClientFactory.FindOneProject(title);
 
-        const result = await ClientFactory.CreateProject(title);
+        return { response:findProd };
+    }
+
+    async ModeHandler(id,mode){
+        const result = await ClientFactory.ModeHandler(id,mode);
         
         return { response:result };
     }

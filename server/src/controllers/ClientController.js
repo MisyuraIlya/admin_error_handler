@@ -25,8 +25,28 @@ Array.from({ length }, (_, i) => start + i);
 
     async CreateProject(request, response){
       try{   
-        const {title} = request.body;
-        const result = await ClientService.CreateProject(title)
+        const {title,image,develop_mode} = request.body;
+        const result = await ClientService.CreateProject(title,image,develop_mode)
+        let res = {
+          response: {
+              id:result.response[0].id,
+              title:result.response[0].title,
+              image:result.response[0].image,
+              develop_mode:result.response[0].develop_mode
+          }
+        }
+        SendResponse(response,res);
+      } catch (error) {
+        console.log(error)
+        response.sendStatus(500);
+      }
+    }
+
+    async ModeHandler(request, response){
+      try{
+        const {id} = request.params;
+        const {mode} = request.body;
+        const result = await ClientService.ModeHandler(id,mode)
         SendResponse(response,result);
       } catch (error) {
         console.log(error)

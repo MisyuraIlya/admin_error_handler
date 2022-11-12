@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { List, Datagrid, TextField, EmailField, EditButton, DeleteButton,  DateInput, SearchInput, SelectInput,Pagination, UrlField } from 'react-admin'
+import { List, Datagrid, TextField, EmailField, EditButton, DeleteButton,  DateInput, SearchInput, SelectInput,Pagination, UrlField , Form, BooleanInput} from 'react-admin'
 import {Card} from '@mui/material';
 import InErrorShow from './InErrorShow';
 import rowStyle from './rowStyle';
@@ -22,6 +22,7 @@ const cronFilter = [
     <DateInput source="cron_date_gte" alwaysOn />,
     <DateInput source="cron_date_lte" alwaysOn />,
     <SearchInput source="c" alwaysOn />,
+
 ];
 
 
@@ -98,6 +99,9 @@ const ProjectData = (props) => {
                     <TextField source='status'/>
                     <TextField source='error'/>
                 </Datagrid>
+
+
+
             </List>
             {/* <List  {...props} resource="clients">
                 <TextField source='title'/>
@@ -106,6 +110,11 @@ const ProjectData = (props) => {
             <div style={{width:'30%', padding:'50px'}}>
                 <Card>
                     <ClientChar months={months} totalErrors={totalErrors}/>
+                    <div style={{display:'flex', justifyContent:'center', alignItems:'center'}}> 
+                        <Form>
+                            <BooleanInput label="Develop Mode" source="develop_mode" />
+                        </Form>
+                    </div>
                 </Card>
 
             </div>

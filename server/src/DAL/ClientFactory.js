@@ -28,10 +28,10 @@ function query(sql,params) {
       }
     }
 
-    async CreateProject(title){
-      const sql = 'INSERT INTO projects ( title ) VALUES (?)';
+    async CreateProject(title,image,mode){
+      const sql = 'INSERT INTO projects ( title,image,develop_mode ) VALUES (?,?,?)';
       try{
-        const result = await query(sql,[title]);
+        const result = await query(sql,[title,image,mode]);
         return result
 
       } catch(e){
@@ -40,9 +40,19 @@ function query(sql,params) {
     }
 
     async FindOneProject(title){
-      const sql = 'SELECT `title` FROM `projects` WHERE `title` = ?'
+      const sql = 'SELECT * FROM `projects` WHERE `title` = ?'
       try {
         const result = await query(sql,[title]);
+        return result
+      } catch(e){
+        console.log(e)
+      }
+    }
+
+    async ModeHandler(id,mode){
+      let sql = 'UPDATE projects SET develop_mode = ? where id = ?'
+      try {
+        const result = await query(sql,[mode,id]);
         return result
       } catch(e){
         console.log(e)
