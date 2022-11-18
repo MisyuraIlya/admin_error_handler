@@ -10,7 +10,7 @@ const phpClass =
 <?php
 class adminError{
     private $ch=null;  
-    private $url = 'http://localhost:5000/api/errors';
+    private $url = 'http://192.168.1.57:5000/api/errors';
     public $project;
     public $title;
     public $code;

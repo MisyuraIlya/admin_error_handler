@@ -19,7 +19,7 @@ function query(sql,params) {
     async ReadTest(){
         
         try{
-          const data = 'http://localhost/admin_error_cron/cronsData/elpaz-funcNameElpaz-12:00:00-14.09.2022.txt'
+          const data = 'http://192.168.1.57/admin_error_cron/cronsData/elpaz-funcNameElpaz-12:00:00-14.09.2022.txt'
           return {response: data};
 
         }catch(e){
@@ -40,7 +40,7 @@ function query(sql,params) {
             name:fileName[1],
             time:fileName[2],
             date:fileName[3],
-            link:`http://localhost/admin_error_cron/cronsData/${doc}`
+            link:`http://192.168.1.57/admin_error_cron/cronsData/${doc}`
           }
           docs.push(obj)
         }
@@ -65,7 +65,7 @@ function query(sql,params) {
             name:fileName[1],
             time:fileName[2],
             date:fileName[3],
-            link:`http://localhost/admin_error_cron/cronsData/${doc}`
+            link:`http://192.168.1.57/admin_error_cron/cronsData/${doc}`
           }
           docs.push(obj)
         }

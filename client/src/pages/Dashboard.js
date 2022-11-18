@@ -24,7 +24,7 @@ const Dashboard = () => {
 
     const fetchApiData = async () => {
         try{
-            const response = await axios.get('http://localhost:5000/api/chart/criticals')
+            const response = await axios.get('http://192.168.1.57:5000/api/chart/criticals')
             console.log(response.data)
             const monthNames = []
             const monthTotals = []

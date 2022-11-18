@@ -29,11 +29,11 @@ function query(sql,params) {
         }
     }
 
-    async CreateError(project,title,code,status,description,response, body = null , language){
+    async CreateError(project,title,code,status,description,response, body = null , language,developMode){
 
-      const sql = 'INSERT INTO errors (project, title, code, status, description, response, body, language) VALUES (?, ?, ?, ?, ?, ?, ?, ?)';
+      const sql = 'INSERT INTO errors (project, title, code, status, description, response, body, language, develop_mode) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)';
       try{
-        const result = await query(sql,[project,title,code,status,description, response, body, language]);
+        const result = await query(sql,[project,title,code,status,description, response, body, language, developMode]);
         return result
 
       } catch(e){
@@ -61,8 +61,7 @@ function query(sql,params) {
       }
     }
 
-    async GetErrorsPerProject(title, firstNum, secondNum, searchFilter, dateFrom, dateTo, developerMode){
-      console.log(developerMode)
+    async GetErrorsPerProject(title, firstNum, secondNum, searchFilter, dateFrom, dateTo, developerMode = 0){
       let filterDate =  dateFrom && dateTo ? `AND date BETWEEN '${dateFrom}' AND '${dateTo}'` : `AND 1=1`
       let filter = searchFilter ? `AND title LIKE '%${searchFilter}%'` : `AND 1=1`
       let sqlTotal = `SELECT COUNT(*) FROM errors WHERE project = ? ${filterDate} ${filter}  AND develop_mode = ? `;

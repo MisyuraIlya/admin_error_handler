@@ -13,8 +13,9 @@ class ErrorService {
     async CreateError(project,title,code,status,description,response, body, language){
 
         let responseData = null;
-        const result = await ErrorFactory.CreateError(project,title,code,status,description, response, body, language);
         const findProject = await ClientFactory.FindOneProject(project)
+        const developMode = findProject[0].develop_mode
+        const result = await ErrorFactory.CreateError(project,title,code,status,description, response, body, language,developMode);
         if(findProject.length > 0){
             responseData = result
         } else {
@@ -32,7 +33,6 @@ class ErrorService {
         } 
         const getId = await ErrorFactory.ReadOneProject(id);
         const result = await ErrorFactory.GetErrorsPerProject(getId[0].title,firstNum,secondNum, searchFilter, dateFrom, dateTo,developerMode)
-        console.log('res', result)
         let total = Object.values(result.total[0])[0]
         return { response: result.result, total:total }
     }

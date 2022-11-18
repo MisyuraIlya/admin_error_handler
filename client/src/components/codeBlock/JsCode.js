@@ -7,7 +7,7 @@ const JsCode = () => {
     export const adminErrors = (error, projectName,title,status) => {
         axios({
             method: 'post',
-            url: 'http://localhost:8085/api/errors',
+            url: 'http://192.168.1.57:8085/api/errors',
             data: {
               project: projectName,
               title: title,
@@ -26,7 +26,7 @@ const JsCode = () => {
     `
     export const ajaxAdminError = (error, projectName, title, status, val) => {
         return $.ajax({
-          url: 'http://localhost:8085/api/errors',
+          url: 'http://192.168.1.57:8085/api/errors',
           type: 'POST',
           data: JSON.stringify({
             project: projectName,

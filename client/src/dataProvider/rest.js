@@ -1,7 +1,7 @@
 import { fetchUtils } from 'react-admin';
 import { stringify } from 'query-string';
 
-const apiUrl = 'http://localhost:5000/api';
+const apiUrl = 'http://192.168.1.57:5000/api';
 const httpClient = fetchUtils.fetchJson;
 
 export default {

@@ -23,7 +23,7 @@ const AllClients = (props) => {
         let changeMode = mode == 0 ? 1 : 0;
         console.log(id, changeMode)
         try{
-            const data = axios.post(`http://localhost:5000/api/clients/mode/${id}`, { mode : changeMode} )
+            const data = axios.post(`http://192.168.1.57:5000/api/clients/mode/${id}`, { mode : changeMode} )
             console.loog(data)
         } catch (e) {
             console.log('handler error', e)
