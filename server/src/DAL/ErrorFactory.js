@@ -67,7 +67,6 @@ function query(sql,params) {
       let filter = searchFilter ? `AND title LIKE '%${searchFilter}%'` : `AND 1=1`
       let sqlTotal = `SELECT COUNT(*) FROM errors WHERE project = ? ${filterDate} ${filter}  AND develop_mode = ? `;
       let sql = `SELECT * FROM errors WHERE project = ? ${filterDate} ${filter} AND develop_mode = ? LIMIT ? OFFSET ?`;
-      console.log('sql',sql,[title, parseInt(firstNum), parseInt(secondNum),parseInt(developerMode)])
       try{
         let resultTotal = await query(sqlTotal,[title,parseInt(developerMode), parseInt(firstNum), parseInt(secondNum)]);
         let result = await query(sql,[title,parseInt(developerMode), parseInt(firstNum), parseInt(secondNum)]);
