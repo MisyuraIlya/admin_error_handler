@@ -11,11 +11,8 @@ const listFilters = [
     <DateInput source="date_gte" alwaysOn />,
     <DateInput source="date_lte" alwaysOn />,
     <SearchInput source="q" alwaysOn />,
-    <SelectInput source="category" choices={[
-        { id: 'programming', name: 'critical' },
-        { id: 'lifestyle', name: 'medium' },
-        { id: 'photography', name: 'light' },
-        ]} />
+    <BooleanInput source="develop_mode" alwaysOn />,
+    // <SelectInput source="developer mode" />
 ];
 
 const cronFilter = [
@@ -110,11 +107,11 @@ const ProjectData = (props) => {
             <div style={{width:'30%', padding:'50px'}}>
                 <Card>
                     <ClientChar months={months} totalErrors={totalErrors}/>
-                    <div style={{display:'flex', justifyContent:'center', alignItems:'center'}}> 
+                    {/* <div style={{display:'flex', justifyContent:'center', alignItems:'center'}}> 
                         <Form>
                             <BooleanInput label="Develop Mode" source="develop_mode" />
                         </Form>
-                    </div>
+                    </div> */}
                 </Card>
 
             </div>

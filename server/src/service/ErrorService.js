@@ -25,9 +25,14 @@ class ErrorService {
 
 
     
-    async ReadOneProject(id, firstNum, secondNum, searchFilter, dateFrom, dateTo){
+    async ReadOneProject(id, firstNum, secondNum, searchFilter, dateFrom, dateTo,develop_mode){
+        let developerMode = 0
+        if(develop_mode){
+             developerMode = 1
+        } 
         const getId = await ErrorFactory.ReadOneProject(id);
-        const result = await ErrorFactory.GetErrorsPerProject(getId[0].title,firstNum,secondNum, searchFilter, dateFrom, dateTo)
+        const result = await ErrorFactory.GetErrorsPerProject(getId[0].title,firstNum,secondNum, searchFilter, dateFrom, dateTo,developerMode)
+        console.log('res', result)
         let total = Object.values(result.total[0])[0]
         return { response: result.result, total:total }
     }

@@ -31,10 +31,10 @@ Array.from({ length }, (_, i) => start + i);
       }
     }
 
-
-
     async ReadOneProject(request, response){
       try{   
+        let develop_mode = request.query.filter
+        develop_mode = JSON.parse(develop_mode).develop_mode
         const {id} = request.params;
         const params = request.query.range;
         const searchFilter = JSON.parse(request.query.filter).q
@@ -44,7 +44,7 @@ Array.from({ length }, (_, i) => start + i);
         const dateTo = JSON.parse(request.query.filter).date_lte
         let PageIndex = firstNum;
         let TotalRows = range(firstNum, secondNum).length;
-        const result = await ErrorService.ReadOneProject(id,TotalRows,PageIndex, searchFilter, dateFrom, dateTo )
+        const result = await ErrorService.ReadOneProject(id,TotalRows,PageIndex, searchFilter, dateFrom, dateTo,develop_mode )
         SendResponse(response, result,firstNum, secondNum );
       } catch (error) {
         console.log(error)
@@ -60,8 +60,6 @@ Array.from({ length }, (_, i) => start + i);
         console.log(error)
       }
     }
-
-
 
     async ReadCriticals(request, response){
       const params = request.query.range;
@@ -109,7 +107,6 @@ Array.from({ length }, (_, i) => start + i);
       }
     }
 
-
     async CriticalYear(request, response){
       try{   
         const result = await ErrorService.CriticalYear()
@@ -128,10 +125,6 @@ Array.from({ length }, (_, i) => start + i);
         response.sendStatus(500);
       } 
     }
-
-
-
-
   }
   
   
